@@ -39,21 +39,21 @@ public:
 };
 int main(void) {
 	string code;
-	int index;//Ë÷Òı
-	ifstream  file ("C:\\Users\\ljh0507\\Desktop\\a.cpp") ;//ÎÄ¼şÊä³ö¶ÔÏó
-	int state=1;//×Ô¶¯»ú×´Ì¬
-	char dd;//µ±Ç°´ı´¦Àí×Ö·û
-	string wait;//µ±Ç°Ô¤´¦Àíµ¥´Ê
+	int index;//ç´¢å¼•
+	ifstream  file ("C:\\Users\\ljh0507\\Desktop\\a.cpp") ;//æ–‡ä»¶è¾“å‡ºå¯¹è±¡
+	int state=1;//è‡ªåŠ¨æœºçŠ¶æ€
+	char dd;//å½“å‰å¾…å¤„ç†å­—ç¬¦
+	string wait;//å½“å‰é¢„å¤„ç†å•è¯
 	string foofoo[19] = { "int","float","double","when","if","else","char","void","for","continue","do","while","return","swtich","case","break",
 	"include","struct","main" };
 	string fubuki[23] = { ";","+","-","*","/","<",">","{","}",">","<","=","==" ,"->",".",">=","<=",",","#","(",")" ,"[","]"};
 	vector<token>IT, CT1,CT2, ST, KT, PT;
-	int big;//¿ªÊ¼½áÊø£¬×Ö·û·Ö¸î
+	int big;//å¼€å§‹ç»“æŸï¼Œå­—ç¬¦åˆ†å‰²
 	index = 0;
-	int j;//ÓÃÓÚ½ç·û´¦Àí
-	token f;//ÓÃÓÚÌí¼Ótoken´®ÖÁÊıÁĞ
+	int j;//ç”¨äºç•Œç¬¦å¤„ç†
+	token f;//ç”¨äºæ·»åŠ tokenä¸²è‡³æ•°åˆ—
 	if (file.is_open()) {
-		istreambuf_iterator<char> beg(file), end;//ÍøÉÏ¶ÁÈ¡Õû¸öÎÄ¼ş°ì·¨
+		istreambuf_iterator<char> beg(file), end;//ç½‘ä¸Šè¯»å–æ•´ä¸ªæ–‡ä»¶åŠæ³•
 		string strdata(beg, end);
 		code = strdata;
 		while(index<=(code.length()-1)){
@@ -64,18 +64,18 @@ int main(void) {
 				}
 				if (index > code.size())
 				{
-					cout << "Ğ¡ÀÏµÜÄãÕâ¸öÊäÈë¾ÍÄáÂêÀëÆ×" << endl;
+					cout << "å°è€å¼Ÿä½ è¿™ä¸ªè¾“å…¥å°±å°¼ç›ç¦»è°±" << endl;
 					exit(0);
 				}
 				dd = code[index];
 				big = index;
-				if ((dd >= 0x41 && dd <= 0x5A) || (dd >= 0x61 && dd <= 0x7A))//ÈôÊäÈëÎª×ÖÄ¸
+				if ((dd >= 0x41 && dd <= 0x5A) || (dd >= 0x61 && dd <= 0x7A))//è‹¥è¾“å…¥ä¸ºå­—æ¯
 				{
 					state++;
 					if(index<code.length()-1)
 						index++;
 				}
-				else if (dd >= 0x30 && dd <= 0x39)//ÈôÊäÈëÎªÊı×Ö
+				else if (dd >= 0x30 && dd <= 0x39)//è‹¥è¾“å…¥ä¸ºæ•°å­—
 				{
 					
 					state = state + 2;
@@ -92,10 +92,10 @@ int main(void) {
 					state = state + 4;
 					index++;
 				}
-				else//´¦Àí½ç·û²¿·Ö£¬¼ò»¯×Ô¶¯»ú
+				else//å¤„ç†ç•Œç¬¦éƒ¨åˆ†ï¼Œç®€åŒ–è‡ªåŠ¨æœº
 				{
 					j = index;
-					while (code[j] != 0x0A && code[j] != 0x20&& code[j] != 0x09 && code[j]!=0x0D)//ĞÎ³É½ç·û²¿·Ö
+					while (code[j] != 0x0A && code[j] != 0x20&& code[j] != 0x09 && code[j]!=0x0D)//å½¢æˆç•Œç¬¦éƒ¨åˆ†
 					{
 						if ((code[j] >= 0x41 && code[j] <= 0x5A) || (code[j] >= 0x61 && code[j] <= 0x7A) || (code[j] >= 0x30 && code[j] <= 0x39))
 						{
@@ -110,21 +110,21 @@ int main(void) {
 							
 						
 					}
-					index = j;//¸üĞÂÄ¿Ç°Ë÷Òı
+					index = j;//æ›´æ–°ç›®å‰ç´¢å¼•
 					if(big==code.length()-1)
 					wait = code.substr(big, 1);
 					else {
 						wait = code.substr(big, j-big);
 					}
 					int panju = 1;
-					for (int fff = 0; fff < PT.size(); fff++) {   //ÅĞ¶Ï´Ë½ç·ûÊÇ·ñÒÑ¾­ÔÚ½ç·ûÊı×éÖĞ
+					for (int fff = 0; fff < PT.size(); fff++) {   //åˆ¤æ–­æ­¤ç•Œç¬¦æ˜¯å¦å·²ç»åœ¨ç•Œç¬¦æ•°ç»„ä¸­
 						if (PT[fff].get_nei(wait)) {
 							panju = 0;
-							PT[fff].show();//½øĞĞÑİÊ¾Êä³ö
+							PT[fff].show();//è¿›è¡Œæ¼”ç¤ºè¾“å‡º
 							break;
 						}
 					}
-					if (panju == 1) {  //ÈôÎ´ÔÚ£¬Ôò½øĞĞÌí¼Ó²Ù×÷
+					if (panju == 1) {  //è‹¥æœªåœ¨ï¼Œåˆ™è¿›è¡Œæ·»åŠ æ“ä½œ
 						int i;
 						for (i = 0; i <= 22; i++) {
 							if (fubuki[i] == wait) {
@@ -137,7 +137,7 @@ int main(void) {
 						}
 						
 						if (i == 23) {
-							cout << "error ´íÎóÄ°Éú×Ö·û" << wait << "Çë¼ì²éÊäÈë" << endl;
+							cout << "error é”™è¯¯é™Œç”Ÿå­—ç¬¦" << wait << "è¯·æ£€æŸ¥è¾“å…¥" << endl;
 							exit(0);
 						}
 					}
@@ -148,7 +148,7 @@ int main(void) {
 			{  
 				
 				j = index;
-				string fff = "K";//¶Ï¶¨ÆäÎª±êÊ¶·û»¹ÊÇ¹Ø¼ü×Ö
+				string fff = "K";//æ–­å®šå…¶ä¸ºæ ‡è¯†ç¬¦è¿˜æ˜¯å…³é”®å­—
 				dd = code[index];
 				if (code[j] == 0x0A || code[j] ==0x20 || code[j] ==0x09||code[j]==0x0D||index==code.length()-1)
 				{   
@@ -287,7 +287,7 @@ int main(void) {
 
 				}
 				else {
-					cout << "³ÌĞò³öÏÖ´íÎó"<< endl;
+					cout << "ç¨‹åºå‡ºç°é”™è¯¯"<< endl;
 					exit(0);
 				}
 				break;
@@ -332,7 +332,7 @@ int main(void) {
 				}
 				else
 				{
-					cout << "error,×Ö·û³£Á¿´íÎó" <<code[j]<< endl;
+					cout << "error,å­—ç¬¦å¸¸é‡é”™è¯¯" <<code[j]<< endl;
 					exit(0);
 				}
 				break;
@@ -347,7 +347,7 @@ int main(void) {
 					index = j;
 				}
 				else {
-					cout << "ERROR ×Ö·û´®³£Á¿³öÏÖ´íÎó" << endl;
+					cout << "ERROR å­—ç¬¦ä¸²å¸¸é‡å‡ºç°é”™è¯¯" << endl;
 					exit(0);
 				}
 				break;
